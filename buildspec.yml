@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt -t .
+
+  pre_build:
+    commands:
+      - echo "Preparing for build..."
+
+  build:
+    commands:
+      - echo "Building the Lambda deployment package..."
+      - zip -r lambda_function.zip .  # Zip all files needed for Lambda
+
+artifacts:
+  files:
+    - lambda_function.zip          # Lambda function zip to be uploaded to S3
+    - cloudformationtemplate.yml   # Include the CloudFormation template for deployment
+  discard-paths: yes
+  base-directory: .                # Base directory for artifacts
+
+cache:
+  paths:
+    - '/root/.cache/pip'
