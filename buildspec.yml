@@ -18,7 +18,7 @@ phases:
 artifacts:
   files:
     - lambda_function.zip          # Lambda function zip to be uploaded to S3
-    - cloudformationtemplate.yml   # Include the CloudFormation template for deployment
+    - templates/cloudformationtemplate.yml    # Include the CloudFormation template for deployment
   discard-paths: yes
   base-directory: .                # Base directory for artifacts
 
