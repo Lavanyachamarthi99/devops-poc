@@ -8,12 +8,12 @@ phases:
 
   pre_build:
     commands:
+      - echo "Setting file permissions for CloudFormation template..."
+      - chmod 644 cloudformationtemplate.yml  # Set the correct permissions for the file
       - echo "Preparing for build..."
 
   build:
     commands:
-      - echo "Listing files in the build environment..."
-      - ls -al  # Lists all files in the current directory to check if cloudformationtemplate.yml is present
       - echo "Building the Lambda deployment package..."
       - zip -r lambda_function.zip .  # Zip all files needed for Lambda
 
@@ -22,7 +22,7 @@ artifacts:
     - lambda_function.zip          # Lambda function zip to be uploaded to S3
     - cloudformationtemplate.yml   # Include the CloudFormation template for deployment
   discard-paths: yes
-  base-directory: .                # Base directory for artifacts (adjust if your files are in a subdirectory)
+  base-directory: .                # Base directory for artifacts
 
 cache:
   paths:
