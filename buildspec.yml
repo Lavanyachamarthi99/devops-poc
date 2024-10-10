@@ -12,15 +12,17 @@ phases:
 
   build:
     commands:
+      - echo "Listing files in the build environment..."
+      - ls -al  # Lists all files in the current directory to check if cloudformationtemplate.yml is present
       - echo "Building the Lambda deployment package..."
       - zip -r lambda_function.zip .  # Zip all files needed for Lambda
 
 artifacts:
   files:
     - lambda_function.zip          # Lambda function zip to be uploaded to S3
-    - templates/cloudformationtemplate.yml    # Include the CloudFormation template for deployment
+    - cloudformationtemplate.yml   # Include the CloudFormation template for deployment
   discard-paths: yes
-  base-directory: .                # Base directory for artifacts
+  base-directory: .                # Base directory for artifacts (adjust if your files are in a subdirectory)
 
 cache:
   paths:
